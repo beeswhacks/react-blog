@@ -1,3 +1,74 @@
 .App {
   text-align: center;
 }
+
+/* set background-color for entire page */
+html {
+  background-color: #1E1E1E;
+}
+
+.navbar {
+  /* set up flexbox */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: stretch;
+  /* fix position at top of page */
+  position: fixed;
+  top: 0;
+  width: 100%;
+  /* styling */
+  padding: 2%;
+  border-bottom: 1px solid black;
+  background-color: #252526;
+  color: #DADAD9;
+}
+
+.navbar .title {
+  flex: 1 0 auto;
+  text-align: left;
+  font-size: 1.8em;
+  margin-left: 1rem;
+}
+
+.navbar .new-post-container {
+  flex: 0 0 auto;
+  margin-right: max(1rem, 5%);
+}
+
+.navbar .new-post-button {
+  background-color: #dfdfdd;
+  border-radius: 2em;
+  border: 0 none;
+  font-size: 1em;
+  padding: 0.6em;
+}
+
+.main {
+  margin-top: max(90px, 8%);
+  color: #DADAD9;
+}
+
+.post-parent {
+  margin: 1rem auto 1rem auto;
+  width: min(90%, 50em);
+  text-align: left;
+}
+
+.post-container {
+  margin: 1rem auto 1rem auto;
+  padding: 1rem;
+  background-color: #252526;
+  border-radius: 0.25em;
+}
+
+.post-container .title {
+  font-size: 1.2em;
+  /* padding-top: 0.5rem; */
+}
+
+.post-container .content {
+  padding: 1rem 0 1rem 0;
+}
+

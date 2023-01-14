@@ -2,11 +2,11 @@ const express = require("express");
 const router = express.Router();
 const BlogPost = require('./schema');
 
-router.get('/', (res) => {
+router.get('/', (req, res) => {
     res.send('Hello world.');
 })
 
-router.get('/blogPosts', (res) => {
+router.get('/blogPosts', (req, res) => {
     BlogPost.find({}, (err, result) => {
         if (err) {
             throw new Error(err);
@@ -17,12 +17,12 @@ router.get('/blogPosts', (res) => {
     })
 });
 
-router.post('/newPost', (res) => {
+router.post('/newPost', (req, res) => {
     // TO DO
     res.send('TBC.');
 });
 
-router.put('/editPost/:id', (res) => {
+router.put('/editPost/:id', (req, res) => {
     // TO DO
     res.send('TBC.');
 })
