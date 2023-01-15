@@ -1,2 +1,2 @@
-# react-social-app
-Repo for experimenting while reading React in Action.
+# react-blog
+A blog app using React.
