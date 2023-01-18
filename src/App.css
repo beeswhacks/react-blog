@@ -19,7 +19,7 @@ html {
   top: 0;
   width: 100%;
   /* styling */
-  padding: 2%;
+  padding: 1em;
   border-bottom: 1px solid black;
   background-color: #252526;
   color: #DADAD9;
@@ -32,21 +32,40 @@ html {
   margin-left: 1rem;
 }
 
-.navbar .new-post-container {
+.navbar .new-post {
   flex: 0 0 auto;
   margin-right: max(1rem, 5%);
-}
-
-.navbar .new-post-button {
-  background-color: #dfdfdd;
-  border-radius: 2em;
+  background-color: #007ACC;
+  color: #DADAD9;
+  border-radius: 0.5em;
   border: 0 none;
   font-size: 1em;
   padding: 0.6em;
 }
 
+.navbar .new-post:hover {
+  background-color: #DADAD9;
+  color: black;
+}
+
+.navbar .home {
+  flex: 0 0 auto;
+  margin-right: 1rem;
+  background-color: #252526;
+  color: #DADAD9;
+  border-radius: 0.5em;
+  border: 0.05em solid #dfdfdd;
+  font-size: 1em;
+  padding: 0.6em;
+}
+
+.navbar .home:hover {
+  background-color: #dfdfdd;
+  color: black;
+}
+
 .main {
-  margin-top: max(90px, 8%);
+  margin-top: 5.5em;
   color: #DADAD9;
 }
 
@@ -65,10 +84,85 @@ html {
 
 .post-container .title {
   font-size: 1.2em;
-  /* padding-top: 0.5rem; */
 }
 
 .post-container .content {
   padding: 1rem 0 1rem 0;
 }
 
+.new-post-container {
+  margin: 1rem auto 1rem auto;
+  padding: 1rem;
+  background-color: #252526;
+  border-radius: 0.25em;
+  width: min(90%, 50em);
+  text-align: left;
+}
+
+.new-post-container .header {
+  font-size: 1.2em;
+  padding: 0 0 1rem 0;
+}
+
+.new-post-container .title {
+  padding: 0 0 1rem 0;
+}
+
+.new-post-container .author {
+  padding: 0 0 1rem 0;
+}
+
+.new-post-container #title, #author {
+  background-color: #252526;
+  color: #DADAD9;
+  border: 0.05em solid #DADAD9;
+  border-radius: 0.3em;
+  font-size: 1em;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.25em 0.5em 0.25em 0.5em;
+  margin: 0.25em 0 0.25em 0;
+}
+
+.new-post-container .content {
+  padding: 0 0 1rem 0;
+}
+
+.new-post-container #content {
+  background-color: #252526;
+  color: #DADAD9;
+  border: 0.05em solid #DADAD9;
+  border-radius: 0.3em;
+  padding: 0.5em;
+  width: 100%;
+  box-sizing: border-box;
+  height: 20em;
+  font-size: 1em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  resize: vertical;
+  overflow: auto;
+  margin: 0.25em 0 0.25em 0;
+}
+
+.new-post-container .submit {
+  font-size: 1em;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.new-post-container #submit {
+  flex: 0 0 auto;
+  background-color: #007ACC;
+  color: white;
+  border-radius: 0.5em;
+  border: none;
+  font-size: 1em;
+  padding: 0.6em;
+}
+
+.new-post-container #submit:hover {
+  background-color: #DADAD9;
+  color: black;
+}
