@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const BlogPost = require('./schema');
+const path = require('path');
 
 router.get('/', (req, res) => {
-    res.send('Request received to root directory of server.');
+    res.sendFile(path.join(__dirname, '/client/public/index.html'));
 })
 
 router.get('/blogPosts', (req, res) => {
