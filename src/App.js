@@ -12,19 +12,17 @@ function NavBar() {
   );
 };
 
-class Post extends Component {
-  render() {
-    return (
-      <div className='post-container'>
-        <div className='title'>{this.props.title}</div>
-        <div className='content'>{this.props.content}</div>
-        <div>
-          <span>{this.props.dateCreated}, </span>
-          <span>Posted by {this.props.author}</span>
-        </div>
+function Post(props) {
+  return (
+    <div className='post-container'>
+      <div className='title'>{props.title}</div>
+      <div className='content'>{props.content}</div>
+      <div>
+        <span>{props.dateCreated}, </span>
+        <span>Posted by {props.author}</span>
       </div>
-    );
-  };
+    </div>
+  );
 };
 
 class PostParent extends Component {
@@ -37,7 +35,7 @@ class PostParent extends Component {
 
   // fetch blog posts from server api endpoint
   componentDidMount() {
-    fetch('http://localhost:3000/blogPosts')
+    fetch('/blogPosts')
       .then(response => response.json())
       .then(data => {
         console.log(data);
@@ -84,7 +82,7 @@ function NewPost() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    fetch('http://localhost:3000/newPost', {
+    fetch('/newPost', {
       method: 'POST',
       body: JSON.stringify(newPost),
       headers: {'Content-Type': 'application/json'}
@@ -141,7 +139,7 @@ function App() {
       <div className='main'>
         <Routes>
           <Route path='/' element={<PostParent/>}/>
-          <Route path='/newPost' element={<NewPost/>}/>
+          <Route path='/newPost' element={<><NewPost/><PostParent/></>}/>
         </Routes>
       </div>
     </div>

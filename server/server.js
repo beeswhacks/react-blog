@@ -8,7 +8,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 require('dotenv').config({path: './config.env'});
-const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 
 app.use(morgan('tiny'));
 app.use(cors());
