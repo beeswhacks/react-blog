@@ -69,6 +69,31 @@ html {
   color: #DADAD9;
 }
 
+.content-loading-text {
+  font-size: 1.2em;
+  margin: 0 0 1em 0;
+  padding: 1em 0 0 0;
+}
+
+.loading-spinner {
+  border: 0.25em solid #dfdfdd;
+  border-top: 0.25em solid #007ACC;
+  border-radius: 50%;
+  width: 2em;
+  height: 2em;
+  animation: spin 2s linear infinite;
+  margin: auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .post-parent {
   margin: 1rem auto 1rem auto;
   width: min(90%, 50em);

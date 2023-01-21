@@ -29,7 +29,8 @@ class PostParent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      blogPosts: []
+      blogPosts: [],
+      isLoading: true
     };
   };
 
@@ -41,9 +42,18 @@ class PostParent extends Component {
         console.log(data);
         this.setState({blogPosts: data});
       })
+      .then(this.setState({isLoading: false}))
   }
 
   render() {
+    if (this.state.isLoading == true) {
+      return (
+        <div>
+          <div className='content-loading-text'>Content loading...</div>
+          <div className='loading-spinner'></div>
+        </div>
+      )
+    }
     return (
       <div className='post-parent'>
         {this.state.blogPosts.map((post) => {
