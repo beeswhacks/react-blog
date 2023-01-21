@@ -37,6 +37,8 @@ router.post('/api/newPost', (req, res) => {
     });
 });
 
+// enable client-side routing via react-router-dom by directing all unrecognised
+// route requests to index.html
 router.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 })
