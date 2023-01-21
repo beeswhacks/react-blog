@@ -7,6 +7,11 @@ router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/client/build/index.html'));
 })
 
+// enable client-side routing of /newPost by serving index.html
+router.get('/newPost', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build/index.html'));
+});
+
 router.get('/api/blogPosts', (req, res) => {
     BlogPost.find({}, (err, result) => {
         if (err) {
