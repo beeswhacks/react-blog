@@ -18,6 +18,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(express.static(path.join(__dirname, 'client/public')));
 
+// enable client-side routing by serving index.html for unrecognised routes
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build/index.html'));
+});
+
 mongoose.set('strictQuery', false);
 mongoose.connect(process.env.MONGODB_URI).
     catch(error => console.error(error)).
