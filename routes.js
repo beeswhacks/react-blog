@@ -4,10 +4,10 @@ const BlogPost = require('./schema');
 const path = require('path');
 
 router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/client/public/index.html'));
+    res.sendFile(path.join(__dirname, '/client/build/index.html'));
 })
 
-router.get('/blogPosts', (req, res) => {
+router.get('/api/blogPosts', (req, res) => {
     BlogPost.find({}, (err, result) => {
         if (err) {
             throw new Error(err);
@@ -18,7 +18,7 @@ router.get('/blogPosts', (req, res) => {
     }).sort({dateCreated: 'desc'})
 });
 
-router.post('/newPost', (req, res) => {
+router.post('/api/newPost', (req, res) => {
     console.log(req.body);
 
     var newPost = new BlogPost({
@@ -39,10 +39,5 @@ router.post('/newPost', (req, res) => {
         };
     });
 });
-
-router.put('/editPost/:id', (req, res) => {
-    // TO DO
-    res.send('TBC.');
-})
 
 module.exports = router;

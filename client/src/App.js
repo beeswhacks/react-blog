@@ -35,7 +35,7 @@ class PostParent extends Component {
 
   // fetch blog posts from server api endpoint
   componentDidMount() {
-    fetch('/blogPosts')
+    fetch('/api/blogPosts')
       .then(response => response.json())
       .then(data => {
         console.log(data);
@@ -82,7 +82,7 @@ function NewPost() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    fetch('/newPost', {
+    fetch('/api/newPost', {
       method: 'POST',
       body: JSON.stringify(newPost),
       headers: {'Content-Type': 'application/json'}
