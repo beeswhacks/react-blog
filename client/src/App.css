@@ -44,29 +44,31 @@ html {
   color: black;
 }
 
-.blue-button {
+.button-blue {
   background-color: #007ACC;
   color: #DADAD9;
   border-radius: 0.5em;
   border: 0 none;
 }
 
-.blue-button:hover {
+.button-blue:hover {
   background-color: #DADAD9;
   color: black;
+}
+
+.normalise-font-size {
+  font-size: 1em;
 }
 
 .navbar .new-post {
   flex: 0 0 auto;
   margin-right: max(1rem, 5%);
-  font-size: 1em;
   padding: 0.6em;
 }
 
 .navbar .home {
   flex: 0 0 auto;
   margin-right: 1rem;
-  font-size: 1em;
   padding: 0.6em;
 }
 
@@ -169,7 +171,6 @@ html {
   color: #DADAD9;
   border: 0.05em solid #DADAD9;
   border-radius: 0.3em;
-  font-size: 1em;
   width: 100%;
   box-sizing: border-box;
   padding: 0.25em 0.5em 0.25em 0.5em;
@@ -189,7 +190,6 @@ html {
   width: 100%;
   box-sizing: border-box;
   height: 20em;
-  font-size: 1em;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -198,14 +198,19 @@ html {
   margin: 0.25em 0 0.25em 0;
 }
 
-.new-post-container .submit {
-  font-size: 1em;
+.new-post-container .bottom-bar {
   display: flex;
   justify-content: flex-end;
 }
 
-.new-post-container #submit {
+.new-post-container .cancel-button {
   flex: 0 0 auto;
-  font-size: 1em;
+  padding: 0.6em;
+  margin-right: 1em;
+  text-decoration: none;
+}
+
+.new-post-container .submit-button {
+  flex: 0 0 auto;
   padding: 0.6em;
 }

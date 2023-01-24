@@ -7,7 +7,7 @@ function NavBar() {
     <div className='navbar'>
       <div className='title'>Jack's blog</div>
       <button className='home button-dark-background' onClick={() => {window.location.href='/'}}>Home</button>
-      <button className='new-post blue-button' onClick={() => {window.location.href='/newPost'}}>New post</button>
+      <button className='new-post button-blue' onClick={() => {window.location.href='/newPost'}}>New post</button>
     </div>
   );
 };
@@ -88,20 +88,48 @@ function CreateOrEditPost(props) {
         <div className='title'>
           <label htmlFor="title">Title: </label>
           <br/>
-          <input id='title' type='text' name='title' value={props.postTitle} placeholder='Give your post a title.' onChange={props.handleChange}/>
+          <input 
+            id='title' 
+            type='text' 
+            className='normalise-font-size' 
+            name='title' 
+            value={props.postTitle} 
+            placeholder='Give your post a title.' 
+            onChange={props.handleChange}/>
         </div>
         <div className='content'>
           <label htmlFor='content'>Content:</label>
           <br/>
-          <textarea id='content' name='content' value={props.content} placeholder='Write your post here.' onChange={props.handleChange}/>
+          <textarea 
+            id='content' 
+            name='content' 
+            className='normalise-font-size' 
+            value={props.content} 
+            placeholder='Write your post here.' 
+            onChange={props.handleChange}/>
         </div>
         <div className='author'>
           <label htmlFor="author">Your name: </label>
           <br/>
-          <input id='author' type='text' name='author' value={props.author} placeholder="What's your name?" onChange={props.handleChange}/>
+          <input 
+            id='author' 
+            type='text' 
+            className='normalise-font-size' 
+            name='author' value={props.author} 
+            placeholder="What's your name?" 
+            onChange={props.handleChange}/>
         </div>
-        <div className='submit'>
-          <button id='submit' className='blue-button' type='submit'>{props.submitButtonText}</button>
+        <div className='bottom-bar'>
+          <a 
+            className='cancel-button button-dark-background normalise-font-size' 
+            href='/'>
+              Cancel
+          </a>
+          <button 
+            className='submit-button button-blue normalise-font-size' 
+            type='submit'>
+              {props.submitButtonText}
+          </button>
         </div>
       </form>
     </div>
@@ -236,7 +264,7 @@ function App() {
       <div className='main'>
         <Routes>
           <Route path='/' element={<PostParent/>}/>
-          <Route path='/newPost' element={<><CreatePost/><PostParent/></>}/>
+          <Route path='/newPost' element={<CreatePost/>}/>
           <Route path='/editPost/:id' element={<EditPost/>}/>
         </Routes>
       </div>
