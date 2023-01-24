@@ -6,8 +6,8 @@ function NavBar() {
   return (
     <div className='navbar'>
       <div className='title'>Jack's blog</div>
-      <button className='home' onClick={() => {window.location.href='/'}}>Home</button>
-      <button className='new-post' onClick={() => {window.location.href='/newPost'}}>New post</button>
+      <button className='home button-dark-background' onClick={() => {window.location.href='/'}}>Home</button>
+      <button className='new-post blue-button' onClick={() => {window.location.href='/newPost'}}>New post</button>
     </div>
   );
 };
@@ -17,9 +17,10 @@ function Post(props) {
     <div className='post-container'>
       <div className='title'>{props.title}</div>
       <div className='content'>{props.content}</div>
-      <div>
-        <span>{props.dateCreated}, </span>
-        <span>Posted by {props.author}</span>
+      <div className='bottom-bar-container'>
+        <span className='date'>{props.dateCreated},</span>
+        <span className='author'>posted by {props.author}</span>
+        <button className='edit-button button-dark-background'>Edit</button>
       </div>
     </div>
   );
@@ -134,7 +135,7 @@ function NewPost() {
           <input id='author' type='text' name='author' placeholder="What's your name?" onChange={handleChange}/>
         </div>
         <div className='submit'>
-          <button id='submit' type='submit'>Create post</button>
+          <button id='submit' className='blue-button' type='submit'>Create post</button>
         </div>
       </form>
     </div>
