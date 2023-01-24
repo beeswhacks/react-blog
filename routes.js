@@ -37,6 +37,39 @@ router.post('/api/newPost', (req, res) => {
     });
 });
 
+router.get('/api/getPost/:id', (req, res) => {
+    BlogPost.findById(req.params.id, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Cannot find post with ID ', req.params.id,'./n', err);
+        };
+        if (result) {
+            res.json(result);
+        };
+    });
+})
+
+router.put('/api/editPost', (req, res) => {
+    console.log('Request received with body: ', req.body);
+    BlogPost.findByIdAndUpdate(req.body.id, 
+        { $set: {
+            title: req.body.title,
+            author: req.body.author,
+            content: req.body.content,
+            dateCreated: Date.now()
+        }},
+        (err, result) => {
+            if (err) {
+                console.error(err);
+                res.status(500).send('Could not update post: ', err);
+            }
+            if (result) {
+                res.status(200).json(result);
+            }
+        }
+    );
+})
+
 // enable client-side routing via react-router-dom by directing all unrecognised
 // route requests to index.html
 router.get('/*', (req, res) => {

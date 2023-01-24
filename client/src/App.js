@@ -1,5 +1,5 @@
-import React, {Component, useState} from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import React, {Component, useState, useEffect} from 'react';
+import { Route, Routes, useNavigate, useParams } from 'react-router-dom';
 import './App.css';
 
 function NavBar() {
@@ -13,6 +13,12 @@ function NavBar() {
 };
 
 function Post(props) {
+  const navigate = useNavigate();
+
+  function handleEdit(id) {
+    navigate('/editPost/' + id);
+  }
+
   return (
     <div className='post-container'>
       <div className='title'>{props.title}</div>
@@ -20,7 +26,9 @@ function Post(props) {
       <div className='bottom-bar-container'>
         <span className='date'>{props.dateCreated},</span>
         <span className='author'>posted by {props.author}</span>
-        <button className='edit-button button-dark-background'>Edit</button>
+        <button className='edit-button button-dark-background' onClick={() => {handleEdit(props.id)}}>
+          Edit
+        </button>
       </div>
     </div>
   );
@@ -47,7 +55,7 @@ class PostParent extends Component {
   }
 
   render() {
-    if (this.state.isLoading == true) {
+    if (this.state.isLoading === true) {
       return (
         <div>
           <div className='content-loading-text'>Content loading...</div>
@@ -60,6 +68,7 @@ class PostParent extends Component {
         {this.state.blogPosts.map((post) => {
           return <Post
             key={post._id}
+            id={post._id}
             author={post.author}
             dateCreated={new Date(post.dateCreated).toLocaleDateString()}
             title={post.title}
@@ -71,7 +80,35 @@ class PostParent extends Component {
   };
 };
 
-function NewPost() {
+function CreateOrEditPost(props) {
+  return (
+    <div className='new-post-container'>
+      <div className='header'>{props.title}</div>
+      <form onSubmit={props.handleSubmit}>
+        <div className='title'>
+          <label htmlFor="title">Title: </label>
+          <br/>
+          <input id='title' type='text' name='title' value={props.postTitle} placeholder='Give your post a title.' onChange={props.handleChange}/>
+        </div>
+        <div className='content'>
+          <label htmlFor='content'>Content:</label>
+          <br/>
+          <textarea id='content' name='content' value={props.content} placeholder='Write your post here.' onChange={props.handleChange}/>
+        </div>
+        <div className='author'>
+          <label htmlFor="author">Your name: </label>
+          <br/>
+          <input id='author' type='text' name='author' value={props.author} placeholder="What's your name?" onChange={props.handleChange}/>
+        </div>
+        <div className='submit'>
+          <button id='submit' className='blue-button' type='submit'>{props.submitButtonText}</button>
+        </div>
+      </form>
+    </div>
+  )
+}
+
+function CreatePost() {
   
   const [newPost, setNewPost] = useState({
     author: '',
@@ -105,9 +142,7 @@ function NewPost() {
         throw new Error('Error saving post.');
       }
     })
-    .then((data) => {
-      console.log('New document added: \n', data);
-    })
+    .then(data => console.log('New document added: \n', data))
     .then(navigate('/'))
     .catch((error) => {
       throw new Error(error);
@@ -116,31 +151,82 @@ function NewPost() {
   
 
   return (
-    <div className='new-post-container'>
-      <div className='header'>New post</div>
-      <form onSubmit={handleSubmit}>
-        <div className='title'>
-          <label htmlFor="title">Title: </label>
-          <br/>
-          <input id='title' type='text' name='title' placeholder='Give your post a title.' onChange={handleChange}/>
-        </div>
-        <div className='content'>
-          <label htmlFor='content'>Content:</label>
-          <br/>
-          <textarea id='content' name='content' placeholder='Write your post here.' onChange={handleChange}/>
-        </div>
-        <div className='author'>
-          <label htmlFor="author">Your name: </label>
-          <br/>
-          <input id='author' type='text' name='author' placeholder="What's your name?" onChange={handleChange}/>
-        </div>
-        <div className='submit'>
-          <button id='submit' className='blue-button' type='submit'>Create post</button>
-        </div>
-      </form>
-    </div>
+    <CreateOrEditPost
+      title='New post'
+      submitButtonText='Create post'
+      handleSubmit={handleSubmit}
+      handleChange={handleChange}
+    />
   )
   
+}
+
+function EditPost() {
+  const navigate = useNavigate();
+
+  const [Post, setPost] = useState({
+    id: useParams().id,
+    title: '',
+    content: '',
+    author: ''
+  });
+
+  useEffect(() => {
+    fetch('/api/getPost/' + Post.id)
+      .then(response => response.json())
+      .then(data => {
+        setPost({
+          ...Post,
+          title: data.title,
+          author: data.author,
+          content: data.content
+        })
+      });
+  }, [Post.id]);
+
+  function handleChange(event) {
+    const name = event.target.name;
+    const value = event.target.value;
+    setPost((prevPost) => ({
+      ...prevPost,
+      [name]: value
+    }));
+  };
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    console.log('Post is: ', Post);
+
+    fetch('/api/editPost', {
+      method: 'PUT',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(Post)
+      
+    })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Error updating post:', response);
+      }
+    })
+    .then(data => console.log('Post updated: ', data))
+    .then(navigate('/'))
+    .catch(() => {throw new Error('Error saving post:')})
+  }
+
+  return (
+    <CreateOrEditPost
+      title='Edit post'
+      submitButtonText='Save changes'
+      content={Post.content}
+      postTitle={Post.title}
+      author={Post.author}
+      handleChange={handleChange}
+      handleSubmit={handleSubmit}
+    />
+  )
 }
 
 function App() {
@@ -150,7 +236,8 @@ function App() {
       <div className='main'>
         <Routes>
           <Route path='/' element={<PostParent/>}/>
-          <Route path='/newPost' element={<><NewPost/><PostParent/></>}/>
+          <Route path='/newPost' element={<><CreatePost/><PostParent/></>}/>
+          <Route path='/editPost/:id' element={<EditPost/>}/>
         </Routes>
       </div>
     </div>
