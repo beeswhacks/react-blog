@@ -6,8 +6,8 @@ function NavBar() {
   return (
     <div className='navbar'>
       <div className='title'>Jack's blog</div>
-      <button className='home button-dark-background' onClick={() => {window.location.href='/'}}>Home</button>
-      <button className='new-post button-blue' onClick={() => {window.location.href='/newPost'}}>New post</button>
+      <button className='home button-dark-background normalise-font-size' onClick={() => {window.location.href='/'}}>Home</button>
+      <button className='new-post button-blue normalise-font-size' onClick={() => {window.location.href='/newPost'}}>New post</button>
     </div>
   );
 };

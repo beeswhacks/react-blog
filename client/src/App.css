@@ -141,6 +141,7 @@ html {
 
 .edit-button {
   flex: 0 0 auto;
+  padding: 0.25em 0.5em 0.25em 0.5em;
 }
 
 .new-post-container {
