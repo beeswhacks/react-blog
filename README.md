@@ -22,3 +22,4 @@ I'm always trying to learn and improve as a programmer, and there are decisions 
 - [x] ~~Add ability to edit posts~~
 - [ ] Add ability to add pictures to posts
 - [ ] Fix loading page while content is loading
+- [ ] Fix line breaks not showing in posts
