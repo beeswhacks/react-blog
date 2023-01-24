@@ -19,6 +19,6 @@ Anyone can create a new post - feel free.
 ## Nice-to-haves
 I'm always trying to learn and improve as a programmer, and there are decisions to be made about where time is best spent to achieve that aim. There were ideas that I had along the way that I would love to add, but adding them might offer a diminished return for my learning compared to starting a new project. I've gathered the ideas here to make sure I don't forget them.
 
-- Add ability to edit posts
-- Add ability to add pictures to posts
-- Fix loading page while content is loading
+- [x] ~~Add ability to edit posts~~
+- [ ] Add ability to add pictures to posts
+- [ ] Fix loading page while content is loading
