@@ -121,6 +121,7 @@ html {
 
 .post-container .content {
   padding: 1rem 0 1rem 0;
+  white-space: pre-line;
 }
 
 .bottom-bar-container {

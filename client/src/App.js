@@ -6,8 +6,16 @@ function NavBar() {
   return (
     <div className='navbar'>
       <div className='title'>Jack's blog</div>
-      <button className='home button-dark-background normalise-font-size' onClick={() => {window.location.href='/'}}>Home</button>
-      <button className='new-post button-blue normalise-font-size' onClick={() => {window.location.href='/newPost'}}>New post</button>
+      <button 
+        className='home button-dark-background normalise-font-size' 
+        onClick={() => {window.location.href='/'}}>
+          Home
+      </button>
+      <button 
+        className='new-post button-blue normalise-font-size' 
+        onClick={() => {window.location.href='/newPost'}}>
+          New post
+      </button>
     </div>
   );
 };
@@ -26,8 +34,10 @@ function Post(props) {
       <div className='bottom-bar-container'>
         <span className='date'>{props.dateCreated},</span>
         <span className='author'>posted by {props.author}</span>
-        <button className='edit-button button-dark-background' onClick={() => {handleEdit(props.id)}}>
-          Edit
+        <button 
+          className='edit-button button-dark-background' 
+          onClick={() => {handleEdit(props.id)}}>
+            Edit
         </button>
       </div>
     </div>
@@ -47,10 +57,7 @@ class PostParent extends Component {
   componentDidMount() {
     fetch('/api/blogPosts')
       .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        this.setState({blogPosts: data});
-      })
+      .then(data => {this.setState({blogPosts: data})})
       .then(this.setState({isLoading: false}))
   }
 
@@ -224,13 +231,10 @@ function EditPost() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    console.log('Post is: ', Post);
-
     fetch('/api/editPost', {
       method: 'PUT',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(Post)
-      
     })
     .then((response) => {
       if (response.ok) {
