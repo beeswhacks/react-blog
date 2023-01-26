@@ -23,8 +23,8 @@ function NavBar() {
 function Post(props) {
   const navigate = useNavigate();
 
-  function handleEdit(id) {
-    navigate('/editPost/' + id);
+  function handleEdit() {
+    navigate('/editPost/' + props.id);
   }
 
   return (
@@ -36,7 +36,7 @@ function Post(props) {
         <span className='author'>posted by {props.author}</span>
         <button 
           className='edit-button button-dark-background' 
-          onClick={() => {handleEdit(props.id)}}>
+          onClick={handleEdit}>
             Edit
         </button>
       </div>
