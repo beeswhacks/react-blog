@@ -44,47 +44,44 @@ function Post(props) {
   );
 };
 
-class PostParent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      blogPosts: [],
-      isLoading: true
-    };
-  };
+function PostParent() {
+  const [blogPosts, setBlogPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   // fetch blog posts from server api endpoint
-  componentDidMount() {
+  useEffect(() => {
     fetch('/api/blogPosts')
       .then(response => response.json())
-      .then(data => {this.setState({blogPosts: data})})
-      .then(this.setState({isLoading: false}))
-  }
+      .then(data => {
+        setBlogPosts([
+          ...data
+        ])
+      })
+      .then(setIsLoading({isLoading: false}))
+  }, [blogPosts]);
 
-  render() {
-    if (this.state.isLoading === true) {
-      return (
-        <div>
-          <div className='content-loading-text'>Content loading...</div>
-          <div className='loading-spinner'></div>
-        </div>
-      )
-    }
+  if (isLoading === true) {
     return (
-      <div className='post-parent'>
-        {this.state.blogPosts.map((post) => {
-          return <Post
-            key={post._id}
-            id={post._id}
-            author={post.author}
-            dateCreated={new Date(post.dateCreated).toLocaleDateString()}
-            title={post.title}
-            content={post.content} 
-          />
-        })}
+      <div>
+        <div className='content-loading-text'>Content loading...</div>
+        <div className='loading-spinner'></div>
       </div>
-    );
-  };
+    )
+  }
+  return (
+    <div className='post-parent'>
+      {blogPosts.map((post) => {
+        return <Post
+          key={post._id}
+          id={post._id}
+          author={post.author}
+          dateCreated={new Date(post.dateCreated).toLocaleDateString()}
+          title={post.title}
+          content={post.content} 
+        />
+      })}
+    </div>
+  );
 };
 
 function CreateOrEditPost(props) {
